@@ -1,8 +1,8 @@
-interface InputProps {
+interface SearchProps {
   label: string
 }
 
-const Input: React.FC<InputProps> = ({ label }) => {
+const Search: React.FC<SearchProps> = ({ label }) => {
   return (
     <div className="mx-auto max-w-xs my-3">
       <div>
@@ -34,4 +34,4 @@ const Input: React.FC<InputProps> = ({ label }) => {
   )
 }
 
-export default Input
+export default Search

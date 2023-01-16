@@ -1,10 +1,15 @@
 import Contacts from '@/components/Contacts';
-import Container from '@/components/Container';
-import Input from '@/components/Input';
+import Search from '@/components/Search';
 import Layout from '@/components/Layout';
+import CreateMessage from '@/components/CreateMessage';
 import Head from 'next/head';
+import MessageHistory from '@/components/MessageHistory';
 
-export default function Home() {
+interface HomeProps {
+  contacts: any; // TODO: type this
+}
+
+const Home: React.FC<HomeProps> = (props) => {
   return (
     <>
       <Head>
@@ -13,13 +18,31 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/chat-bubble.png" />
       </Head>
-      <Container>
-        <Layout
-          header={<Input label='Search'/>}
-          leftSidebar={<Contacts />}
-          content={<div>Content</div>}
-        />
-      </Container>
+      <Layout
+        header={<Search label="Search" />}
+        leftSidebar={<Contacts contacts={props.contacts} />}
+        content={
+          <>
+            <MessageHistory />
+            <CreateMessage />
+          </>
+        }
+      />
     </>
   );
+};
+
+// here we fetch the data on the server side
+export async function getStaticProps() {
+  return {
+    props: {
+      contacts: await fetch('https://jsonplaceholder.typicode.com/users').then(
+        (resp) => resp.json()
+      ),
+    },
+    // rebuilds the page every 30 minutes
+    revalidate: 1800,
+  };
 }
+
+export default Home;
