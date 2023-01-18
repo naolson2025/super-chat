@@ -4,6 +4,7 @@ import Layout from '@/components/Layout';
 import CreateMessage from '@/components/CreateMessage';
 import Head from 'next/head';
 import MessageHistory from '@/components/MessageHistory';
+import ChatHistory from '@/data/dummy-data'
 
 interface HomeProps {
   contacts: any; // TODO: type this
@@ -11,7 +12,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = (props) => {
   return (
-    <>
+    <div className="h-screen">
       <Head>
         <title>Super Chat</title>
         <meta name="description" content="chat app side project" />
@@ -23,12 +24,12 @@ const Home: React.FC<HomeProps> = (props) => {
         leftSidebar={<Contacts contacts={props.contacts} />}
         content={
           <>
-            <MessageHistory />
+            <MessageHistory messages={ChatHistory} />
             <CreateMessage />
           </>
         }
       />
-    </>
+    </div>
   );
 };
 

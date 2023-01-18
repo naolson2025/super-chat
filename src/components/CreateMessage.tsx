@@ -1,12 +1,12 @@
 const CreateMessage = () => {
   return (
-    <div className="mx-auto max-w-xs">
+    <div className="mx-auto max-w-xs absolute inset-x-0 bottom-0 mb-4">
       <div className="relative overflow-hidden rounded-md border border-gray-300 shadow-sm focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
         <textarea
           id="example5"
           className="block w-full border-0 focus:border-0 focus:ring-0 resize-none"
           rows={3}
-          placeholder="Leave a message"
+          placeholder="Message"
         ></textarea>
         <div className="flex w-full items-center justify-between bg-white p-2">
           <div className="flex space-x-1">
@@ -47,7 +47,7 @@ const CreateMessage = () => {
             type="button"
             className="rounded border border-primary-500 bg-primary-500 px-2 py-1.5 text-center text-xs font-medium text-white shadow-sm transition-all hover:bg-primary-700 focus:ring focus:ring-primary-100"
           >
-            Comment
+            Send
           </button>
         </div>
       </div>
