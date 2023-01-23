@@ -1,16 +1,26 @@
-import Contacts from '@/components/Contacts';
+import ContactList from '@/components/ContactList';
 import Search from '@/components/Search';
 import Layout from '@/components/Layout';
 import CreateMessage from '@/components/CreateMessage';
 import Head from 'next/head';
-import MessageHistory from '@/components/MessageHistory';
-import ChatHistory from '@/data/dummy-data'
+import Conversation from '@/components/Conversation';
+import Conversations from '@/data/dummy-data';
+import { ContactType } from '@/types/ContactType';
+import React from 'react';
 
 interface HomeProps {
-  contacts: any; // TODO: type this
+  contacts: ContactType[];
 }
 
 const Home: React.FC<HomeProps> = (props) => {
+  const [selectedContact, setSelectedContact] = React.useState<ContactType>(
+    props.contacts[0]
+  );
+
+  const handleSelectContact = (contact: ContactType) => {
+    setSelectedContact(contact);
+  };
+
   return (
     <div className="h-screen">
       <Head>
@@ -21,10 +31,16 @@ const Home: React.FC<HomeProps> = (props) => {
       </Head>
       <Layout
         header={<Search label="Search" />}
-        leftSidebar={<Contacts contacts={props.contacts} />}
+        leftSidebar={
+          <ContactList
+            contacts={props.contacts}
+            selectedContact={selectedContact}
+            handleSelectContact={handleSelectContact}
+          />
+        }
         content={
           <>
-            <MessageHistory messages={ChatHistory} />
+            <Conversation messages={Conversations[selectedContact.id]} />
             <CreateMessage />
           </>
         }
